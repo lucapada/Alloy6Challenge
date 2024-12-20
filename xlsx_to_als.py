@@ -54,14 +54,7 @@ else:
 
                 print(f"Processing Student {student_id}...", end="\r")
 
-                # 5.1 aggiungo il mapping tra studente e ID
-                student_mapping.append({
-                    "student_Id": student_id,
-                    "student_PersonCode": student_personcode,
-                    "teacher": teacher
-                })
-
-                # 5.2. se devo raggruppare per prof., creo la cartella se non esiste
+                # 5.1. se devo raggruppare per prof., creo la cartella se non esiste
                 if group_by_teacher:
                     os.makedirs(f"{working_path}/{teacher}", exist_ok=True)
                     working_file = f"{working_path}/{teacher}/{student_id}.als" 
@@ -73,15 +66,23 @@ else:
                         f.write("// " + ac + "\n")
                         f.write(r[ac])
                         f.write("\n\n")
-                
+
+                # 5.2 aggiungo il mapping tra studente e ID
+                student_mapping.append({
+                    "student_Id": student_id,
+                    "student_PersonCode": student_personcode,
+                    "teacher": teacher,
+                    "als_file": working_file
+                })
+
                 print(f"[✓] Student {student_id} processed successfully.")
                 
             # 6. salvo il mapping tra studente e ID
             print("Saving mapping files...", end="\r")
             with open(f"{working_path}/student_mapping.csv", "w") as f:
-                f.write("ID,Person Code,Teacher\n")
+                f.write("ID,Person Code,Teacher,.als File\n")
                 for sm in student_mapping:
-                    f.write(f"{sm['student_Id']},{sm['student_PersonCode']},{sm['teacher']}\n")
+                    f.write(f"{sm['student_Id']},{sm['student_PersonCode']},{sm['teacher']},{sm['als_file']}\n")
 
             print("[✓] Mapping files saved successfully.")
         except Exception as e:
