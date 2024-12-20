@@ -6,14 +6,14 @@
     ```bash
     pip install -r requirements.txt
     ```
-2. Run `xlsx_to_als.py` via terminal:
+2. Run `generate_als.py` via terminal:
     ```bash
-    python xlsx_to_als.py
+    python generate_als.py
     ```
 
 ### Validate .als model
-1. Move into the `Alloy4Fun/api` directory.
-2. Build the Alloy4Fun api's image with:
+1. Patch the `Dockerfile` within the `Alloy4Fun/api` directory with the one you find in this directory.
+2. Move into the `Alloy4Fun/api` directory, then build the Alloy4Fun api's docker image with:
     ```bash
     docker build -t alloy4fun-api .
     ```
