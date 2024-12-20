@@ -12,19 +12,23 @@
     ```
 
 ### Validate .als model
-1. Patch the `Dockerfile` within the `Alloy4Fun/api` directory with the one you find in this directory.
-2. Move into the `Alloy4Fun/api` directory, then build the Alloy4Fun api's docker image with:
+1. Get Alloy4Fun as git submodule:
+    ```bash
+    git submodule update --init --recursive
+    ```
+2. Patch the `Dockerfile` within the `Alloy4Fun/api` directory with the one you find in this directory.
+3. Move into the `Alloy4Fun/api` directory, then build the Alloy4Fun api's docker image with:
     ```bash
     docker build -t alloy4fun-api .
     ```
-3. Run the docker container with:
+4. Run the docker container with:
     ```bash
     docker run -it --rm -p 8080:8080 alloy4fun-api
     ```
-4. Wait for the following output: 
+5. Wait for the following output: 
     ```
     INFO  [org.wildfly.swarm] (main) THORN99999: Thorntail is Ready
     ```
-5. Move back to the main directory and either:
+6. Move back to the main directory and either:
     - run `python validate_als_demo.py` to check if the endpoint is working properly
     - run `python validate_als.py` to validate all the .als files
