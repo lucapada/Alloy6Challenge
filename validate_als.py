@@ -65,7 +65,8 @@ for i, r in df.iterrows():
 
         if keep_check:
             with open(f"{check_path}/syntax_check_results.txt", "a") as f:
-                f.write(f"{student_id}\t{student_personcode}\t{teacher}\t{als_file}\t{"OK" if result["success"] else "KO"}\n")
+                res = "OK" if result["success"] else "KO"
+                f.write(f"{student_id}\t{student_personcode}\t{teacher}\t{als_file}\t{res}\n")
 
 print("All students checked successfully.\n")
 
